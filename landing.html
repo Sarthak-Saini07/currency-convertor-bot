@@ -1,0 +1,166 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Currency Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="landing-header">
+        <div class="header-content">
+            <h1>Global Currency Converter</h1>
+            <p>Convert currencies in real-time with our powerful tool</p>
+        </div>
+    </header>
+
+    <main class="landing-main">
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Real-Time Rates</h3>
+                <p>Get the most up-to-date exchange rates from reliable sources</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-globe"></i>
+                <h3>150+ Currencies</h3>
+                <p>Convert between all major world currencies and more</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-calculator"></i>
+                <h3>Easy to Use</h3>
+                <p>Simple interface that makes conversion effortless</p>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Convert?</h2>
+            <p>Experience the easiest way to convert currencies online</p>
+            <a href="/converter" class="cta-button">Start Converting Now <i class="fas fa-arrow-right"></i></a>
+        </section>
+    </main>
+
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Providing accurate currency conversion since 2023. Our mission is to make financial calculations accessible to everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/converter">Currency Converter</a></li>
+                    <li><a href="#">Exchange Rates</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@currencyconverter.com</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Global Currency Converter. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Currency Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .landing-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url("{{ url_for('static', filename='images/currency-bg.jpg') }}") center/cover no-repeat;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        /* Rest of your landing page styles... */
+    </style>
+</head>
+<body>
+    <header class="landing-header">
+        <div class="header-content">
+            <h1>Global Currency Converter</h1>
+            <p>Convert currencies in real-time with our powerful tool</p>
+        </div>
+    </header>
+
+    <main class="landing-main">
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Real-Time Rates</h3>
+                <p>Get the most up-to-date exchange rates from reliable sources</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-globe"></i>
+                <h3>150+ Currencies</h3>
+                <p>Convert between all major world currencies and more</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-calculator"></i>
+                <h3>Easy to Use</h3>
+                <p>Simple interface that makes conversion effortless</p>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Convert?</h2>
+            <p>Experience the easiest way to convert currencies online</p>
+            <a href="/converter" class="cta-button">Start Converting Now <i class="fas fa-arrow-right"></i></a>
+        </section>
+    </main>
+
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Providing accurate currency conversion since 2023. Our mission is to make financial calculations accessible to everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/converter">Currency Converter</a></li>
+                    <li><a href="#">Exchange Rates</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@currencyconverter.com</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Global Currency Converter. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

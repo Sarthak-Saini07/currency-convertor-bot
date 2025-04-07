@@ -1,0 +1,537 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e88e5;
+            --primary-light: #64b5f6;
+            --primary-dark: #0d47a1;
+            --light-color: #ffffff;
+            --dark-color: #212121;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #e3f2fd;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .money-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%231e88e5" opacity="0.2"/><text x="50" y="55" font-family="Arial" font-size="40" text-anchor="middle" fill="%230d47a1">$</text></svg>'), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%231e88e5" opacity="0.2"/><text x="50" y="55" font-family="Arial" font-size="40" text-anchor="middle" fill="%230d47a1">€</text></svg>'), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%231e88e5" opacity="0.2"/><text x="50" y="55" font-family="Arial" font-size="40" text-anchor="middle" fill="%230d47a1">£</text></svg>'), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%231e88e5" opacity="0.2"/><text x="50" y="55" font-family="Arial" font-size="40" text-anchor="middle" fill="%230d47a1">¥</text></svg>');
+            background-size: 200px 200px;
+            animation: moveBackground 60s linear infinite;
+        }
+        
+        @keyframes moveBackground {
+            0% { background-position: 0 0, 100px 50px, 50px 100px, 150px 150px; }
+            100% { background-position: 500px 500px, 600px 550px, 550px 600px, 650px 650px; }
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.85); /* More transparent */
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            transition: var(--transition);
+            backdrop-filter: blur(8px); /* Increased blur for better effect */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Lighter border */
+        }
+        
+        .container:hover {
+            box-shadow: 0 8px 24px rgba(30, 136, 229, 0.3);
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly less transparent on hover */
+        }
+        
+        h1 {
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        h1::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 3px;
+        }
+        
+        h1 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(224, 224, 224, 0.8); /* Slightly transparent */
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.7); /* More transparent */
+        }
+        
+        input[type="number"]:focus {
+            border-color: var(--primary-light);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+            background-color: rgba(255, 255, 255, 0.9); /* Less transparent when focused */
+        }
+        
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        button[type="submit"]::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            transform: scale(0);
+            transition: var(--transition);
+        }
+        
+        button[type="submit"]:hover::after {
+            transform: scale(1);
+        }
+        
+        .custom-select {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .custom-select input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(224, 224, 224, 0.8); /* Slightly transparent */
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.7); /* More transparent */
+        }
+        
+        .custom-select input[type="text"]:focus {
+            border-color: var(--primary-light);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+            background-color: rgba(255, 255, 255, 0.9); /* Less transparent when focused */
+        }
+        
+        .custom-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 300px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.95); /* Less transparent for readability */
+            border: 2px solid rgba(224, 224, 224, 0.8);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            border-top: none;
+            z-index: 100;
+            display: none;
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(5px);
+        }
+        
+        .custom-option {
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--dark-color);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .custom-option:last-child {
+            border-bottom: none;
+        }
+        
+        .custom-option:hover, .custom-option.highlighted {
+            background-color: rgba(227, 242, 253, 0.7); /* Slightly transparent */
+            color: var(--primary-dark);
+        }
+        
+        .custom-select.active .custom-options {
+            display: block;
+        }
+        
+        .swap-container {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .swap-btn {
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent */
+            color: var(--primary-color);
+            border: 2px solid var(--primary-light);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .swap-btn:hover {
+            background: var(--primary-light);
+            color: white;
+            transform: rotate(180deg) scale(1.1);
+        }
+        
+        .no-results {
+            color: #757575;
+            font-style: italic;
+            pointer-events: none;
+        }
+        
+        /* Floating currency coins */
+        .floating-coins {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .coin {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+        
+        .coin:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%231e88e5"/><text x="50" y="60" font-family="Arial" font-size="40" text-anchor="middle" fill="white">$</text></svg>');
+            left: 10%;
+            top: 10%;
+            animation-duration: 20s;
+        }
+        
+        .coin:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%230d47a1"/><text x="50" y="60" font-family="Arial" font-size="40" text-anchor="middle" fill="white">€</text></svg>');
+            left: 70%;
+            top: 20%;
+            animation-duration: 25s;
+            animation-delay: 5s;
+        }
+        
+        .coin:nth-child(3) {
+            width: 70px;
+            height: 70px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%2364b5f6"/><text x="50" y="60" font-family="Arial" font-size="40" text-anchor="middle" fill="white">£</text></svg>');
+            left: 30%;
+            top: 60%;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+        
+        .coin:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%231e88e5"/><text x="50" y="60" font-family="Arial" font-size="40" text-anchor="middle" fill="white">¥</text></svg>');
+            left: 80%;
+            top: 70%;
+            animation-duration: 22s;
+            animation-delay: 7s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="money-background"></div>
+    <div class="floating-coins">
+        <div class="coin"></div>
+        <div class="coin"></div>
+        <div class="coin"></div>
+        <div class="coin"></div>
+    </div>
+    
+    <div class="container">
+        <h1><i class="fas fa-exchange-alt"></i> Currency Converter</h1>
+        <form method="POST" action="/convert">
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" step="0.01" min="0" required>
+            </div>
+            
+            <div class="form-group">
+                <label>From Currency:</label>
+                <div class="custom-select" id="from-currency-select">
+                    <input type="text" id="from_search" placeholder="Search currency..." autocomplete="off">
+                    <input type="hidden" id="from_currency" name="from_currency" required>
+                    <div class="custom-options" id="from-options">
+                        {% for currency in currencies %}
+                        <div class="custom-option" data-value="{{ currency }}">{{ currency }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="swap-container">
+                <button type="button" class="swap-btn" id="swap-currencies">
+                    <i class="fas fa-exchange-alt"></i>
+                </button>
+            </div>
+            
+            <div class="form-group">
+                <label>To Currency:</label>
+                <div class="custom-select" id="to-currency-select">
+                    <input type="text" id="to_search" placeholder="Search currency..." autocomplete="off">
+                    <input type="hidden" id="to_currency" name="to_currency" required>
+                    <div class="custom-options" id="to-options">
+                        {% for currency in currencies %}
+                        <div class="custom-option" data-value="{{ currency }}">{{ currency }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit">Convert</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize both selectors
+            initCurrencySelector('from-currency-select', 'from_search', 'from_currency', 'from-options');
+            initCurrencySelector('to-currency-select', 'to_search', 'to_currency', 'to-options');
+            
+            // Swap currencies functionality
+            document.getElementById('swap-currencies').addEventListener('click', function() {
+                const fromValue = document.getElementById('from_currency').value;
+                const toValue = document.getElementById('to_currency').value;
+                const fromSearch = document.getElementById('from_search');
+                const toSearch = document.getElementById('to_search');
+                
+                // Only swap if both values exist
+                if (fromValue && toValue) {
+                    document.getElementById('from_currency').value = toValue;
+                    document.getElementById('to_currency').value = fromValue;
+                    fromSearch.value = toSearch.value;
+                    toSearch.value = fromSearch.value;
+                    
+                    // Add animation effect
+                    this.classList.add('swapping');
+                    setTimeout(() => {
+                        this.classList.remove('swapping');
+                    }, 300);
+                }
+            });
+            
+            // Add subtle hover effect to container
+            const container = document.querySelector('.container');
+            container.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                container.style.transform = `perspective(1000px) rotateX(${(y - 0.5) * 2}deg) rotateY(${(x - 0.5) * -2}deg)`;
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        function initCurrencySelector(containerId, searchId, hiddenId, optionsId) {
+            const container = document.getElementById(containerId);
+            const searchInput = document.getElementById(searchId);
+            const hiddenInput = document.getElementById(hiddenId);
+            const optionsContainer = document.getElementById(optionsId);
+            const options = optionsContainer.querySelectorAll('.custom-option');
+            let highlightedIndex = -1;
+
+            // Show options when input is focused
+            searchInput.addEventListener('focus', function() {
+                container.classList.add('active');
+                filterOptions();
+            });
+
+            // Hide options when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!container.contains(e.target)) {
+                    container.classList.remove('active');
+                }
+            });
+
+            // Filter options as user types
+            searchInput.addEventListener('input', function() {
+                filterOptions();
+                highlightedIndex = -1;
+            });
+
+            // Keyboard navigation
+            searchInput.addEventListener('keydown', function(e) {
+                const visibleOptions = Array.from(options).filter(opt => opt.style.display !== 'none');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    highlightedIndex = Math.min(highlightedIndex + 1, visibleOptions.length - 1);
+                    updateHighlightedOption(visibleOptions);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    highlightedIndex = Math.max(highlightedIndex - 1, -1);
+                    updateHighlightedOption(visibleOptions);
+                } else if (e.key === 'Enter' && highlightedIndex >= 0) {
+                    e.preventDefault();
+                    selectOption(visibleOptions[highlightedIndex]);
+                }
+            });
+
+            // Select option on click
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectOption(this);
+                });
+            });
+
+            function filterOptions() {
+                const searchTerm = searchInput.value.toLowerCase();
+                let hasMatches = false;
+                
+                options.forEach(option => {
+                    const text = option.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        option.style.display = '';
+                        hasMatches = true;
+                    } else {
+                        option.style.display = 'none';
+                    }
+                });
+                
+                // If no matches, show a message
+                if (!hasMatches) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'custom-option no-results';
+                    noResults.textContent = 'No currencies found';
+                    if (!optionsContainer.querySelector('.no-results')) {
+                        optionsContainer.appendChild(noResults);
+                    }
+                } else {
+                    const noResults = optionsContainer.querySelector('.no-results');
+                    if (noResults) {
+                        noResults.remove();
+                    }
+                }
+            }
+
+            function selectOption(option) {
+                if (option.classList.contains('no-results')) return;
+                
+                searchInput.value = option.textContent;
+                hiddenInput.value = option.dataset.value;
+                container.classList.remove('active');
+                
+                // Add a subtle selection effect
+                option.classList.add('selected');
+                setTimeout(() => {
+                    option.classList.remove('selected');
+                }, 300);
+            }
+
+            function updateHighlightedOption(visibleOptions) {
+                options.forEach(opt => opt.classList.remove('highlighted'));
+                if (highlightedIndex >= 0 && highlightedIndex < visibleOptions.length) {
+                    visibleOptions[highlightedIndex].classList.add('highlighted');
+                    visibleOptions[highlightedIndex].scrollIntoView({
+                        block: 'nearest'
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>

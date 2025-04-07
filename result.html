@@ -1,0 +1,501 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Conversion Result</h1>
+        <div class="result">
+            <p>{{ amount }} {{ from_currency }} = {{ converted_amount }} {{ to_currency }}</p>
+            <a href="/" class="back-btn">Convert Again</a>
+        </div>
+    </div>
+</body>
+</html> -->
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter | Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Modern Blue Money-Themed CSS */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 30px;
+        }
+        .header h1 {
+            color: #0A2463;
+            margin: 0 0 20px 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #3E92CC 0%, #0A2463 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .conversion-text {
+            font-size: 18px;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .amount {
+            font-weight: 600;
+            font-size: 22px;
+        }
+        .highlighted {
+            color: #FFD700;
+            font-size: 24px;
+        }
+        .currency {
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        .equals {
+            font-weight: 400;
+        }
+        .back-btn {
+            display: inline-block;
+            background: #00A6FB;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 166, 251, 0.3);
+        }
+        .back-btn:hover {
+            background: #0088CC;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 166, 251, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>💰 Conversion Result</h1>
+            </div>
+            <div class="result-box">
+                <p class="conversion-text">
+                    <span class="amount">{{ amount }}</span>
+                    <span class="currency">{{ from_currency }}</span>
+                    <span class="equals">=</span>
+                    <span class="amount highlighted">{{ converted_amount }}</span>
+                    <span class="currency">{{ to_currency }}</span>
+                </p>
+            </div>
+            <a href="/" class="back-btn">Convert Again</a>
+        </div>
+    </div>
+</body>
+</html> -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Result | Money Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2e7d32;  /* Rich green */
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --accent-color: #ffc107;   /* Gold for money accents */
+            --light-color: #ffffff;
+            --dark-color: #263238;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #e8f5e9;  /* Light green background */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .money-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%232e7d32" opacity="0.2"/><text x="50" y="55" font-family="Arial" font-size="40" text-anchor="middle" fill="%231b5e20">$</text></svg>'), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%232e7d32" opacity="0.2"/><text x="50" y="55" font-family="Arial" font-size="40" text-anchor="middle" fill="%231b5e20">€</text></svg>'), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%232e7d32" opacity="0.2"/><text x="50" y="55" font-family="Arial" font-size="40" text-anchor="middle" fill="%231b5e20">£</text></svg>'), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%232e7d32" opacity="0.2"/><text x="50" y="55" font-family="Arial" font-size="40" text-anchor="middle" fill="%231b5e20">¥</text></svg>');
+            background-size: 200px 200px;
+            animation: moveBackground 60s linear infinite;
+        }
+        
+        @keyframes moveBackground {
+            0% { background-position: 0 0, 100px 50px, 50px 100px, 150px 150px; }
+            100% { background-position: 500px 500px, 600px 550px, 550px 600px, 650px 650px; }
+        }
+        
+        .floating-coins {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .coin {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+        
+        .coin:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%232e7d32"/><text x="50" y="60" font-family="Arial" font-size="40" text-anchor="middle" fill="white">$</text></svg>');
+            left: 10%;
+            top: 10%;
+            animation-duration: 20s;
+        }
+        
+        .coin:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%231b5e20"/><text x="50" y="60" font-family="Arial" font-size="40" text-anchor="middle" fill="white">€</text></svg>');
+            left: 70%;
+            top: 20%;
+            animation-duration: 25s;
+            animation-delay: 5s;
+        }
+        
+        .coin:nth-child(3) {
+            width: 70px;
+            height: 70px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%234caf50"/><text x="50" y="60" font-family="Arial" font-size="40" text-anchor="middle" fill="white">£</text></svg>');
+            left: 30%;
+            top: 60%;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+        
+        .coin:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%232e7d32"/><text x="50" y="60" font-family="Arial" font-size="40" text-anchor="middle" fill="white">¥</text></svg>');
+            left: 80%;
+            top: 70%;
+            animation-duration: 22s;
+            animation-delay: 7s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+        
+        .container:hover {
+            box-shadow: 0 12px 28px rgba(46, 125, 50, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        h1 {
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            font-weight: 700;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        h1::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            /* background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); */
+            margin: 15px auto 0;
+            border-radius: 3px;
+        }
+        
+        .result-box {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: 0 6px 18px rgba(46, 125, 50, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-box::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .conversion-text {
+            font-size: 20px;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .amount {
+            font-weight: 600;
+            font-size: 24px;
+        }
+        
+        .highlighted {
+            color: var(--accent-color);
+            font-size: 28px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .currency {
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .equals {
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.4);
+        }
+        
+        .back-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            transform: scale(0);
+            transition: var(--transition);
+        }
+        
+        .back-btn:hover::after {
+            transform: scale(1);
+        }
+        
+        /* Sparkle effect for the result */
+        .sparkle {
+            position: absolute;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            animation: sparkle 1s ease-out forwards;
+        }
+        
+        @keyframes sparkle {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="money-background"></div>
+    <div class="floating-coins">
+        <div class="coin"></div>
+        <div class="coin"></div>
+        <div class="coin"></div>
+        <div class="coin"></div>
+    </div>
+    
+    <div class="container">
+        <h1><i class="fas fa-coins"></i> Conversion Result</h1>
+        <div class="result-box">
+            <p class="conversion-text">
+                <span class="amount">{{ amount }}</span>
+                <span class="currency">{{ from_currency }}</span>
+                <span class="equals">=</span>
+                <span class="amount highlighted">{{ converted_amount }}</span>
+                <span class="currency">{{ to_currency }}</span>
+            </p>
+        </div>
+        <a href="/" class="back-btn">
+            <i class="fas fa-exchange-alt"></i> Convert Again
+        </a>
+    </div>
+
+    <script>
+        // Add sparkle effect when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultBox = document.querySelector('.result-box');
+            
+            // Create 8 sparkles in random positions
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.classList.add('sparkle');
+                    
+                    // Random position within result box
+                    const size = Math.random() * 10 + 5;
+                    const x = Math.random() * 80 + 10;
+                    const y = Math.random() * 80 + 10;
+                    
+                    sparkle.style.width = `${size}px`;
+                    sparkle.style.height = `${size}px`;
+                    sparkle.style.left = `${x}%`;
+                    sparkle.style.top = `${y}%`;
+                    
+                    resultBox.appendChild(sparkle);
+                    
+                    // Remove sparkle after animation
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 1000);
+                }, i * 150);
+            }
+            
+            // Add subtle hover tilt effect to container
+            const container = document.querySelector('.container');
+            container.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                container.style.transform = `perspective(1000px) rotateX(${(y - 0.5) * 2}deg) rotateY(${(x - 0.5) * -2}deg) translateY(-5px)`;
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-5px)';
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
