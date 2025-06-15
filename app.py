@@ -171,7 +171,7 @@ class CurrencyConvertor:
         except KeyError as e:
             raise ValueError(f"Invalid currency code: {e}")
 
-API_KEY = 'e911fba6f5cd3ebfb999c1bca1c692a1'
+API_KEY = 'your api key'
 URL = f'http://data.fixer.io/api/latest?access_key={API_KEY}&symbols=USD,INR,EUR,GBP'
 
 @app.route('/')
